@@ -1,5 +1,5 @@
 var guessesLeft = 10;
-var highScores = new Array();
+var highScores = new Array([2, "A name"]);
 var correctGuess = Math.floor(Math.random()*100) + 1;
 
 $(function() {
@@ -84,7 +84,7 @@ function updateHighScores() {
 }
 
 function sortFunction(a, b) {
-	return b[0]-a[0];
+	return a[0]-b[0];
 }
 
 function animateText() {
