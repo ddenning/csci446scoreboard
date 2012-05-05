@@ -12,7 +12,7 @@ $(function() {
 });
 
 function populateHighScores(scores) {
-	$('div#highScores').html("<table><tr><td id=\"rank\">Rank</td><td id=\"scores\">Score</td><td id=\"name\">Name</td></tr>");
+	$('div#highScores').html("<table><tr><td id=\"rank\">Rank</td><td id=\"scores\">Number of guesses</td><td id=\"name\">Name</td></tr>");
   for (var i = 0; i < scores.length; ++i) {
     $('div#highScores').append("<tr><td id=\"rank\">" + (i+1) + "</td><td id=\"scores\">" + scores[i][0] + "</td><td id=\"name\">" + scores[i][1] + "</td></tr>");
   }
@@ -75,7 +75,7 @@ function updateHighScores() {
 	while(!name) {
 		name = prompt("Enter your name", "");
 	}
-	highScores.push([guessesLeft, name]);
+	highScores.push([10 - guessesLeft, name]);
 	highScores.sort(sortFunction);
 	while(highScores.size > 5) {
 		highScores.pop();
@@ -84,7 +84,7 @@ function updateHighScores() {
 }
 
 function sortFunction(a, b) {
-	return a[0]-b[0];
+	return b[0]-a[0];
 }
 
 function animateText() {

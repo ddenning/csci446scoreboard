@@ -47,7 +47,7 @@ button#btnGuess {
 }
 
 #scores{
-  width: 3em;
+  width: 10em;
   text-align: left;
 }
 
@@ -57,7 +57,7 @@ button#btnGuess {
 }
 
 #highScores {
-  width: 16em;
+  width: 23em;
   margin: auto;
 }
 
