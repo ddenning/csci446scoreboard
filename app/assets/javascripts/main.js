@@ -1,5 +1,5 @@
 var guessesLeft = 10;
-var highScores = new Array([2, "A name"]);
+var highScores = new Array();
 var correctGuess = Math.floor(Math.random()*100) + 1;
 
 $(function() {
@@ -12,11 +12,21 @@ $(function() {
 });
 
 function populateHighScores(scores) {
-	$('div#highScores').html("<table><tr><td id=\"rank\">Rank</td><td id=\"scores\">Number of guesses</td><td id=\"name\">Name</td></tr>");
-  for (var i = 0; i < scores.length; ++i) {
-    $('div#highScores').append("<tr><td id=\"rank\">" + (i+1) + "</td><td id=\"scores\">" + scores[i][0] + "</td><td id=\"name\">" + scores[i][1] + "</td></tr>");
-  }
-  $('div#highScores').append("</table>");
+	highScores.length = 0;
+
+	$.get("scores", function(scores) {
+		for (i in scores) {
+			highScores.push([scores[i].score, scores[i].name]);
+		};
+
+		$('div#highScores').html("<table><tr><td id=\"rank\">Rank</td><td id=\"scores\">Number of guesses</td><td id=\"name\">Name</td></tr>");
+
+	  for (var i = 0; i < highScores.length; ++i) {
+	    $('div#highScores').append("<tr><td id=\"rank\">" + (i+1) + "</td><td id=\"scores\">" + highScores[i][0] + "</td><td id=\"name\">" + highScores[i][1] + "</td></tr>");
+	  }
+
+	  $('div#highScores').append("</table>");
+	});
 }
 
 function updateScore(score) {
@@ -75,11 +85,15 @@ function updateHighScores() {
 	while(!name) {
 		name = prompt("Enter your name", "");
 	}
-	highScores.push([10 - guessesLeft, name]);
+
+	var newScore = {name: name, score: 10-guessesLeft};
+	$.post("scores", newScore, function(newScore){}, "json");
+
+	/*highScores.push([10 - guessesLeft, name]);
 	highScores.sort(sortFunction);
 	while(highScores.size > 5) {
 		highScores.pop();
-	}
+	}*/
 	populateHighScores(highScores);
 }
 

@@ -2,8 +2,11 @@ class ScoresController < ApplicationController
 
 	def index
 		@scores = Score.order(:score)
+		respond_to do |format|
+			#format.js
+			format.json { render json: @scores }
+		end
 
-		render json: @scores
 	end
 
 	def create
@@ -15,5 +18,5 @@ class ScoresController < ApplicationController
 			render json: @score.errors, status: :unprocessable_entity
 		end
 	end
-	
+
 end
