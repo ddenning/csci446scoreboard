@@ -1,6 +1,7 @@
 var guessesLeft = 10;
 var highScores = new Array();
 var correctGuess = Math.floor(Math.random()*100) + 1;
+var url = "www.pure-summer-7310.herokuapp.com/scores"
 
 $(function() {
   updateScore(guessesLeft);
@@ -14,7 +15,7 @@ $(function() {
 function populateHighScores(scores) {
 	highScores.length = 0;
 
-	$.get("scores", function(scores) {
+	$.get(url, function(scores) {
 		for (i in scores) {
 			highScores.push([scores[i].score, scores[i].name]);
 		};
@@ -87,7 +88,7 @@ function updateHighScores() {
 	}
 
 	var newScore = {name: name, score: 10-guessesLeft};
-	$.post("scores", newScore, function(newScore){}, "json");
+	$.post(url, newScore, function(newScore){}, "json");
 
 	/*highScores.push([10 - guessesLeft, name]);
 	highScores.sort(sortFunction);
