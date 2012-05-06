@@ -1,7 +1,7 @@
 var guessesLeft = 10;
 var highScores = new Array();
 var correctGuess = Math.floor(Math.random()*100) + 1;
-var url = "www.pure-summer-7310.herokuapp.com/scores.json"
+var url = "scores"
 
 $(function() {
   updateScore(guessesLeft);
