@@ -1,4 +1,4 @@
 Scoreboard::Application.routes.draw do
 
-  resources :scores, :only => [:index, :create, :destroy]
+  resources :scores, :only => [:index, :create]
 end
